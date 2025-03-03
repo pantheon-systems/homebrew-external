@@ -1,8 +1,8 @@
 class Terminus < Formula
   desc "Terminus is Pantheon's Command-line Interface (CLI)"
   homepage "https://pantheon.io/terminus"
-  url "https://github.com/pantheon-systems/terminus/releases/download/3.6.1/terminus.phar"
-  sha256 "9cefcb8d5f0953334173d837cef943a8b88afec17fae4327c15271bfc9c3dc50"
+  url "https://github.com/pantheon-systems/terminus/releases/download/3.6.2/terminus.phar"
+  sha256 "42e192c6ebd8f0e52110f0a6eea173cfed1a7489babceb98fe16d175c3fe3b82"
   license "MIT"
 
   depends_on "composer" => :optional
