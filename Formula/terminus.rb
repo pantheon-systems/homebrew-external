@@ -6,11 +6,15 @@ class Terminus < Formula
   license "MIT"
 
   depends_on "composer" => :optional
-
-  uses_from_macos "php"
+  depends_on "php@8.3"
 
   def install
-    bin.install "terminus.phar" => "terminus"
+    libexec.install "terminus.phar"
+
+    (bin/"terminus").write <<~PHP
+      #!#{Formula["php@8.3"].opt_bin}/php
+      <?php require '#{libexec}/terminus.phar';
+    PHP
   end
 
   test do
