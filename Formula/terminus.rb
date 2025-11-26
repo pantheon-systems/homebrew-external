@@ -5,9 +5,9 @@ class Terminus < Formula
   sha256 "4f045509adedb6c68e0946af97761e5f8f39408e9775e628980758f2e9b2a5f4"
   license "MIT"
 
-  depends_on "composer" => :optional
+  depends_on "composer"
 
-  uses_from_macos "php"
+  depends_on "php"
 
   def install
     bin.install "terminus.phar" => "terminus"
