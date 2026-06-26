@@ -1,0 +1,21 @@
+name: CI
+
+permissions:
+  contents: read
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@841d750a0ed9262d3c3ca31f2173974696bc261a # master
+      - name: Style check
+        run: brew style Formula/terminus.rb
+      - name: Audit formula
+        run: brew audit --strict Formula/terminus.rb
