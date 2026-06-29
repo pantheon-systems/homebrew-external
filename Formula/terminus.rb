@@ -14,6 +14,6 @@ class Terminus < Formula
   end
 
   test do
-    system "#{bin}/terminus", "art"
+    system bin/"terminus", "art"
   end
 end
