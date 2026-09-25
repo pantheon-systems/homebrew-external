@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
       - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@841d750a0ed9262d3c3ca31f2173974696bc261a # master
+        uses: Homebrew/actions/setup-homebrew@e99025eb970cfa124b8284a35463d87426917478 # master
       - name: Style check
         run: brew style pantheon-systems/external/terminus
       - name: Audit formula
