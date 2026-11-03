@@ -1,6 +1,6 @@
 # Releasing
 
-When a new Terminus version is published, update the formula manually:
+When a new Terminus version is published, the terminus release workflow's "Package a Homebrew release" job opens the formula PR on its own ([terminus#2939](https://github.com/pantheon-systems/terminus/pull/2939)). If that job fails, update the formula manually:
 
 1. Find the new release on the [Terminus releases page](https://github.com/pantheon-systems/terminus/releases)
 2. Download the `.phar` file and compute its SHA256:
