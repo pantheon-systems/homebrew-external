@@ -10,35 +10,13 @@ brew install pantheon-systems/external/terminus
 
 ## Rollback
 
-A merge to `main` is the deploy. `brew update` reads the tap's `main` directly, and nothing else runs, so the next `brew upgrade terminus` installs whatever the formula points at.
+A merge to `main` is the deploy: `brew update` reads the tap's `main` directly, and nothing else runs. The full procedure is in [DEPLOYMENT.md](DEPLOYMENT.md#rollback).
 
-### When to roll back
-
-- The Terminus release the formula points at has been pulled back (marked as a pre-release), per the Terminus [rollback steps](https://github.com/pantheon-systems/terminus/blob/4.x/README.md#rollback).
-- `brew install` or `brew upgrade terminus` fails, e.g. a checksum mismatch, or the formula's `test do` block (`terminus art`) fails.
-- Reports in `#ask-hosting` or from Support that the Homebrew-installed Terminus is broken and the previous version works.
-
-### Roll back the formula
-
-1. Open a PR that reverts the formula bump: `git revert <BAD_COMMIT>` on a branch, or set `url` and `sha256` in `Formula/terminus.rb` back to `<PREVIOUS_VERSION>`. The hash of that version's asset is in the file's history, or run:
-   ```bash
-   curl -sL https://github.com/pantheon-systems/terminus/releases/download/<PREVIOUS_VERSION>/terminus.phar | shasum -a 256
-   ```
-2. CI runs `brew style` and `brew audit --strict` on the PR. A Developer Experience member other than the author approves it, and it merges through the merge queue.
-
-### What a rollback does not undo
-
-Users who already upgraded keep the bad version until they run `brew update && brew reinstall terminus`. To pull the release back from `terminus self:update` and Composer as well, follow the [Terminus rollback](https://github.com/pantheon-systems/terminus/blob/4.x/README.md#rollback).
-
-### Verify the rollback
-
-- `Formula/terminus.rb` on `main` has the `url` and `sha256` of `<PREVIOUS_VERSION>`.
-- After `brew update && brew reinstall terminus`, `terminus --version` prints `Terminus <PREVIOUS_VERSION>`, and the reported symptom is gone.
-
-### Who to page
-
-The owning team is Developer Experience (`@pantheon-systems/developer-experience`). Ask in `#ask-hosting`. Nobody is paged for this tap.
+- **When:** the Terminus release the formula points at was pulled back, `brew install` / `brew upgrade terminus` fails (e.g. a checksum mismatch), or the Homebrew-installed Terminus is reported broken while the previous version works.
+- **Recover:** open a PR that reverts the formula bump (or sets `url` and `sha256` in `Formula/terminus.rb` back to the previous version); another Developer Experience member approves, and it merges through the merge queue. Users who already upgraded need `brew update && brew reinstall terminus`.
+- **Verify:** `Formula/terminus.rb` on `main` has the previous version's `url` and `sha256`, its hash matches the release asset, and `terminus --version` prints that version after a reinstall.
+- **Who to page:** nobody is paged. The owner is Developer Experience (`@pantheon-systems/developer-experience`); ask in `#ask-hosting`.
 
 ## Releasing
 
-See [RELEASING.md](RELEASING.md).
+See [DEPLOYMENT.md](DEPLOYMENT.md#how-a-change-reaches-production).
